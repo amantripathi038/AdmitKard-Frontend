@@ -15,7 +15,14 @@ const Main = () => {
   const [file, setFile] = useState(null);
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
-    setFile(selectedFile);
+    if (selectedFile?.type === "text/plain" && selectedFile.name.endsWith(".txt")) {
+      setFile(selectedFile);
+    }
+    else {
+      alert("Only txt files are supported.")
+      e.target.value = "";
+      setFile(null);
+    };
   };
 
   const analyzeText = () => {
